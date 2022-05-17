@@ -19,7 +19,7 @@ jobs:
           distribution: temurin
       - name: Change directory api
         run: mvn -B compile
-        working-directory: ./e-shop-api
+        working-directory: ./e-shop-api/demo
 
   frontend:
     runs-on: ubuntu-latest
