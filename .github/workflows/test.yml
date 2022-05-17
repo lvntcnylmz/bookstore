@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: mv -f backend/* .
+        working-directory: ./e-shop-api
       - uses: actions/setup-java@v3
         with:
           java-version: 17
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: mv -f frontend/* .
+      working-directory: ./e-shop-frontend
       - uses: actions/setup-node@v3
         with:
           node-version: 16
