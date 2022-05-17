@@ -11,13 +11,14 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3  
       - name: Set up JDK 17
-      - uses: actions/setup-java@v3
+        uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: temurin
-      - run: mvn -B compile
+      - name: Change directory api
+        run: mvn -B compile
         working-directory: ./e-shop-api
 
   frontend:
@@ -25,11 +26,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Node.js 16
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+      - name: Change directory frontend
+      - run: |
+          npm ci
+          npm run build --if-present
+          npm test
         working-directory: ./e-shop-frontend
   
