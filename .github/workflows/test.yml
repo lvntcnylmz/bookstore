@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Change directory to backend 
+      #- name: Change directory to backend 
       - run: mv -f e-shop-api/*.
       - name: Set up JDK 17
-      - uses: actions/setup-java@v3
+        uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: temurin
@@ -26,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Change directory to frontend
+      #- name: Change directory to frontend
       - run: mv -f frontend/* .
       - name: Use Node.js 
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - run: npm ci
