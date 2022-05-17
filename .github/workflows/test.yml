@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-      - name: Change directory api
+      - name: Change directory to api
         run: mvn -B compile
         working-directory: ./e-shop-api/demo
 
@@ -29,7 +29,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Change directory frontend
+      - name: Change directory to frontend
         run: |
           npm ci
           npm run build --if-present
