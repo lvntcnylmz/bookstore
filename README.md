@@ -13,9 +13,6 @@ Simple e-commerce project that includes backend and frontend parts where users c
     - PostgreSQL Database
     - JUnit 5
 <br>
+
 - **Frontend**
     - Angular 16
-
-## Prerequisites
----
-- Maven
