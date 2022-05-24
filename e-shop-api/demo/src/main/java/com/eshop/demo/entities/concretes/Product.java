@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 
 import com.eshop.demo.entities.abstracts.BaseEntity;
 
+import lombok.Builder;
+
 @Entity
+@Builder
 public class Product extends BaseEntity {
 
     @Id
@@ -38,6 +41,14 @@ public class Product extends BaseEntity {
     }
 
     public Product() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProductName() {
