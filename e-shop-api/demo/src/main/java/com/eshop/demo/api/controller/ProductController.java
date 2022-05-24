@@ -1,7 +1,7 @@
 package com.eshop.demo.api.controller;
 
 import com.eshop.demo.business.abstracts.ProductService;
-import com.eshop.demo.entities.concretes.Product;
+import com.eshop.demo.dtos.ProductDto;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Product product){
+    public ResponseEntity<?> add(@RequestBody ProductDto product){
         return ResponseEntity.ok(this.productService.add(product));
     }
 
