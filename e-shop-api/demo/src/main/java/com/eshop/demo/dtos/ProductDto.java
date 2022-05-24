@@ -1,10 +1,21 @@
 package com.eshop.demo.dtos;
 
-public record ProductDto(
-        Long id,
-        String productName,
-        Double unitPrice,
-        Short unitsInStock,
-        String description,
-        String categoryName) {
+import com.eshop.demo.entities.concretes.Category;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProductDto {
+
+    private Long id;
+    private String productName;
+    private Double unitPrice;
+    private Short unitsInStock;
+    private String description;
+    private Category category;
+
 }
