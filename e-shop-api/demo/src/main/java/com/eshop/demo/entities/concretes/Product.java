@@ -11,10 +11,7 @@ import javax.persistence.ManyToOne;
 
 import com.eshop.demo.entities.abstracts.BaseEntity;
 
-import lombok.Builder;
-
 @Entity
-@Builder
 public class Product extends BaseEntity {
 
     @Id
@@ -26,7 +23,7 @@ public class Product extends BaseEntity {
     private short unitsInStock;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
 

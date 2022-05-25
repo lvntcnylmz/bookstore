@@ -2,17 +2,12 @@ package com.eshop.demo.entities.concretes;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.eshop.demo.entities.abstracts.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "products" })
 public class Category extends BaseEntity {
 
     @Id
@@ -21,7 +16,8 @@ public class Category extends BaseEntity {
 
     private String categoryName;
 
-    @OneToMany(mappedBy = "category")
+    //@JsonIgnore
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category(Long id, String categoryName, List<Product> products) {
