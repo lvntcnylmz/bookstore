@@ -12,6 +12,7 @@ import com.eshop.demo.dataAccess.ProductRepository;
 import com.eshop.demo.dtos.ProductDto;
 import com.eshop.demo.entities.concretes.Product;
 
+import com.eshop.demo.exceptions.ProductNotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public DataResult<ProductDto> getByProductId(Long id) {
 
-        Product product = this.productRepository.findById(id).orElseThrow();
+        Product product = this.productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product could not found by id : " + id));
         
         return new SuccessDataResult<>(this.convertToDto(product), "The product has found.");
     }
@@ -51,7 +53,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public DataResult<ProductDto> getByProductName(String productName) {
 
-        Product product = this.productRepository.findByProductName(productName).orElseThrow();
+        Product product = this.productRepository.findByProductName(productName)
+                .orElseThrow(() -> new ProductNotFoundException("Product could not found by product name : " + productName));
 
         return new SuccessDataResult<>(this.convertToDto(product), "The product has found.");
     }
@@ -67,14 +70,14 @@ public class ProductServiceImpl implements ProductService {
     private List<ProductDto> convertToDtoList() {
         return this.productRepository.findAll()
                 .stream()
-                .map(product -> this.convertToDto(product))
+                .map(this::convertToDto)
                 .toList();
     }
 
     private List<ProductDto> convertToDtoSortedList() {
-        return this.productRepository.findAll(Sort.by(Sort.Direction.DESC, "productName"))
+        return this.productRepository.findAll(Sort.by(Sort.Direction.ASC, "productName"))
                 .stream()
-                .map(product -> this.convertToDto(product))
+                .map(this::convertToDto)
                 .toList();
     }
 
