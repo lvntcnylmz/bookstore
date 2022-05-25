@@ -1,7 +1,6 @@
 package com.eshop.demo.dtos;
 
 import com.eshop.demo.entities.concretes.Category;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +15,6 @@ public class ProductDto {
     private Double unitPrice;
     private Short unitsInStock;
     private String description;
-    private Category category;
+    private Long categoryId;
 
 }
