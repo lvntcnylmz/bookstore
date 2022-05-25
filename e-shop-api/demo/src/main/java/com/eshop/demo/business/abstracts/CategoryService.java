@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.eshop.demo.core.utils.results.abstracts.Result;
 import com.eshop.demo.core.utils.results.concretes.DataResult;
-import com.eshop.demo.entities.concretes.Category;
+import com.eshop.demo.dtos.CategoryDto;
 
 public interface CategoryService {
 
-    Result add(Category category);
+    Result add(CategoryDto categoryDto);
 
-    DataResult<List<Category>> getAllCategories();
+    DataResult<List<CategoryDto>> getAllCategories();
 
-    DataResult<List<Category>> getAllCategoriesSorted();
+    DataResult<List<CategoryDto>> getAllCategoriesSorted();
 
 }
