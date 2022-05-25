@@ -1,7 +1,7 @@
 package com.eshop.demo.api.controller;
 
 import com.eshop.demo.business.abstracts.CategoryService;
-import com.eshop.demo.entities.concretes.Category;
+import com.eshop.demo.dtos.CategoryDto;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Category product){
-        return ResponseEntity.ok(this.categoryService.add(product));
+    public ResponseEntity<?> add(@RequestBody CategoryDto category){
+        return ResponseEntity.ok(this.categoryService.add(category));
     }
 
     @GetMapping("/getAll")
