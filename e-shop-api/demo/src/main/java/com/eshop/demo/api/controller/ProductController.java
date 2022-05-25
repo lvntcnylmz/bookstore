@@ -4,6 +4,7 @@ import com.eshop.demo.business.abstracts.ProductService;
 import com.eshop.demo.dtos.ProductDto;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ public class ProductController {
         return ResponseEntity.ok(this.productService.getAllProductsSorted());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<?> getByProductId(@PathVariable Long id){
         return ResponseEntity.ok(this.productService.getByProductId(id));
     }
