@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.eshop.demo.entities.abstracts.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category extends BaseEntity {
