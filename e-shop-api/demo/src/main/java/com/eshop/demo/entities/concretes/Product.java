@@ -1,22 +1,26 @@
 package com.eshop.demo.entities.concretes;
 
+import java.util.UUID;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.eshop.demo.entities.abstracts.BaseEntity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Product extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
     private String productName;
     private double unitPrice;
@@ -27,9 +31,18 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product(Long id, String productName, double unitPrice, short unitsInStock, String description,
+    public Product(UUID id, String productName, double unitPrice, short unitsInStock, String description,
             Category category) {
         this.id = id;
+        this.productName = productName;
+        this.unitPrice = unitPrice;
+        this.unitsInStock = unitsInStock;
+        this.description = description;
+        this.category = category;
+    }
+
+    public Product(String productName, double unitPrice, short unitsInStock, String description,
+            Category category) {
         this.productName = productName;
         this.unitPrice = unitPrice;
         this.unitsInStock = unitsInStock;
@@ -40,11 +53,11 @@ public class Product extends BaseEntity {
     public Product() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -15,12 +15,16 @@ public class Category extends BaseEntity {
 
     private String categoryName;
 
-    //@JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category(Long id, String categoryName, List<Product> products) {
         this.id = id;
+        this.categoryName = categoryName;
+        this.products = products;
+    }
+
+    public Category(String categoryName, List<Product> products) {
         this.categoryName = categoryName;
         this.products = products;
     }
