@@ -1,10 +1,9 @@
 package com.eshop.demo.api.controller;
 
 import com.eshop.demo.business.abstracts.ProductService;
-import com.eshop.demo.dtos.ProductDto;
+import com.eshop.demo.dtos.request.ProductRequestDto;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,18 +22,18 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody ProductDto product){
-        return ResponseEntity.ok(this.productService.add(product));
+    public ResponseEntity<?> add(@RequestBody ProductRequestDto productRequest){
+        return ResponseEntity.ok(this.productService.add(productRequest));
     }
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllProducts(){
-        return ResponseEntity.ok(this.productService.getAllProducts());
+        return ResponseEntity.ok(this.productService.getAll());
     }
 
     @GetMapping("/getAllSorted")
     public ResponseEntity<?> getAllProductsSorted(){
-        return ResponseEntity.ok(this.productService.getAllProductsSorted());
+        return ResponseEntity.ok(this.productService.getAllSorted());
     }
 
     @GetMapping("id/{id}")

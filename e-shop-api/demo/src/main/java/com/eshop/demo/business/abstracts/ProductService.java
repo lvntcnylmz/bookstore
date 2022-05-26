@@ -4,18 +4,19 @@ import java.util.List;
 
 import com.eshop.demo.core.utils.results.abstracts.Result;
 import com.eshop.demo.core.utils.results.concretes.DataResult;
-import com.eshop.demo.dtos.ProductDto;
+import com.eshop.demo.dtos.request.ProductRequestDto;
+import com.eshop.demo.dtos.response.ProductResponseDto;
 
 public interface ProductService {
     
-    Result add(ProductDto productDto);
+    Result add(ProductRequestDto product);
     
-    DataResult<List<ProductDto>> getAllProducts();
+    DataResult<List<ProductResponseDto>> getAll();
 
-    DataResult<List<ProductDto>> getAllProductsSorted();
+    DataResult<List<ProductResponseDto>> getAllSorted();
     
-    DataResult<ProductDto> getByProductId(Long id);
+    DataResult<ProductResponseDto> getByProductId(Long id);
 
-    DataResult<ProductDto> getByProductName(String productName);
+    DataResult<ProductResponseDto> getByProductName(String productName);
 
 }
