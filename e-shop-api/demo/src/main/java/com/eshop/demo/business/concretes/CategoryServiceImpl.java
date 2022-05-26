@@ -1,5 +1,6 @@
 package com.eshop.demo.business.concretes;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.eshop.demo.business.abstracts.CategoryService;
@@ -10,9 +11,9 @@ import com.eshop.demo.core.utils.results.concretes.SuccessResult;
 import com.eshop.demo.dataAccess.CategoryRepository;
 import com.eshop.demo.dtos.request.CategoryRequestDto;
 import com.eshop.demo.dtos.response.CategoryResponseDto;
+import com.eshop.demo.dtos.response.converter.CategoryDtoConverter;
 import com.eshop.demo.entities.concretes.Category;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,9 @@ import org.springframework.stereotype.Service;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final ModelMapper modelMapper;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, ModelMapper modelMapper) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -44,25 +43,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private Category convertToEntity(CategoryRequestDto categoryRequest) {
-        return this.modelMapper.map(categoryRequest, Category.class);
+        return new Category(categoryRequest.getCategoryName(), Collections.emptyList()); 
     }
 
-    private CategoryResponseDto convertToDto(Category category) {
-        return this.modelMapper.map(category, CategoryResponseDto.class);
-    }
+    // private CategoryResponseDto convertToDto(Category category) {
+    //     return CategoryDtoConverter.entityToDto(category);
+    // }
 
     private List<CategoryResponseDto> convertToDtoList() {
-        return this.categoryRepository.findAll()
-                .stream()
-                .map(this::convertToDto)
-                .toList();
+        return CategoryDtoConverter.entityToDtoList(this.categoryRepository.findAll());
     }
 
     private List<CategoryResponseDto> convertToDtoSortedList() {
-        return this.categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "categoryName"))
-                .stream()
-                .map(this::convertToDto)
-                .toList();
+        return CategoryDtoConverter
+                .entityToDtoList(this.categoryRepository.findAll(Sort.by(Sort.Direction.ASC, "categoryName")));
     }
 
 }

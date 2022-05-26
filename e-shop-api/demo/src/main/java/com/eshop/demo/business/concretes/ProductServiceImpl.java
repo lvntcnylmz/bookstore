@@ -7,14 +7,16 @@ import com.eshop.demo.core.utils.results.abstracts.Result;
 import com.eshop.demo.core.utils.results.concretes.DataResult;
 import com.eshop.demo.core.utils.results.concretes.SuccessDataResult;
 import com.eshop.demo.core.utils.results.concretes.SuccessResult;
+import com.eshop.demo.dataAccess.CategoryRepository;
 import com.eshop.demo.dataAccess.ProductRepository;
 import com.eshop.demo.dtos.request.ProductRequestDto;
 import com.eshop.demo.dtos.response.ProductResponseDto;
+import com.eshop.demo.dtos.response.converter.ProductDtoConverter;
+import com.eshop.demo.entities.concretes.Category;
 import com.eshop.demo.entities.concretes.Product;
 
 import com.eshop.demo.exceptions.ProductNotFoundException;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +24,11 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final ModelMapper modelMapper;
+    private final CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
-        this.modelMapper = modelMapper;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -49,8 +51,8 @@ public class ProductServiceImpl implements ProductService {
     public DataResult<ProductResponseDto> getByProductId(Long id) {
 
         Product product = this.productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product could not found by id : " + id));
-        
+                .orElseThrow(() -> new ProductNotFoundException("Product could not found by id: " + id));
+
         return new SuccessDataResult<>(this.convertToDto(product), "The product has found.");
     }
 
@@ -58,31 +60,33 @@ public class ProductServiceImpl implements ProductService {
     public DataResult<ProductResponseDto> getByProductName(String productName) {
 
         Product product = this.productRepository.findByProductName(productName)
-                .orElseThrow(() -> new ProductNotFoundException("Product could not found by product name : " + productName));
+                .orElseThrow(() -> new ProductNotFoundException("Product could not found by name: " + productName));
 
         return new SuccessDataResult<>(this.convertToDto(product), "The product has found.");
     }
 
     private Product convertToEntity(ProductRequestDto productRequest) {
-        return this.modelMapper.map(productRequest, Product.class);
+        Category category = this.categoryRepository.getById(productRequest.getCategoryId());
+
+        return new Product(
+                productRequest.getProductName(),
+                productRequest.getUnitPrice(),
+                productRequest.getUnitsInStock(),
+                productRequest.getDescription(),
+                category);
     }
 
     private ProductResponseDto convertToDto(Product product) {
-        return this.modelMapper.map(product, ProductResponseDto.class);
+        return ProductDtoConverter.entityToDto(product);
     }
 
     private List<ProductResponseDto> convertToDtoList() {
-        return this.productRepository.findAll()
-                .stream()
-                .map(this::convertToDto)
-                .toList();
+        return ProductDtoConverter.entityToDtoList(this.productRepository.findAll());
     }
 
     private List<ProductResponseDto> convertToDtoSortedList() {
-        return this.productRepository.findAll(Sort.by(Sort.Direction.ASC, "productName"))
-                .stream()
-                .map(this::convertToDto)
-                .toList();
+        return ProductDtoConverter
+                .entityToDtoList(this.productRepository.findAll(Sort.by(Sort.Direction.ASC, "productName")));
     }
 
 }
