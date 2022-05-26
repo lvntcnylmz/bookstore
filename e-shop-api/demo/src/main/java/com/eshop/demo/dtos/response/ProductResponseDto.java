@@ -1,5 +1,7 @@
 package com.eshop.demo.dtos.response;
 
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductResponseDto {
     
-    private Long id;
+    private UUID id;
     private String productName;
     private Double unitPrice;
     private Short unitsInStock;
     private String description;
     private Long categoryId;
-    private String categoryCategoryName;
+    private String categoryName;
 
 }
