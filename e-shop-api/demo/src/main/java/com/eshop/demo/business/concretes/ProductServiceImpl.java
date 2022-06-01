@@ -3,6 +3,7 @@ package com.eshop.demo.business.concretes;
 import java.util.List;
 
 import com.eshop.demo.business.abstracts.ProductService;
+import com.eshop.demo.core.utils.messages.Message;
 import com.eshop.demo.core.utils.results.abstracts.Result;
 import com.eshop.demo.core.utils.results.concretes.DataResult;
 import com.eshop.demo.core.utils.results.concretes.SuccessDataResult;
@@ -34,35 +35,33 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Result add(ProductRequestDto productRequest) {
         this.productRepository.save(this.convertToEntity(productRequest));
-        return new SuccessResult("The product added.");
+        return new SuccessResult(Message.SAVED);
     }
 
     @Override
     public DataResult<List<ProductResponseDto>> getAll() {
-        return new SuccessDataResult<>(this.convertToDtoList(), "Products are listed.");
+        return new SuccessDataResult<>(this.convertToDtoList(), Message.LISTED);
     }
 
     @Override
     public DataResult<List<ProductResponseDto>> getAllSorted() {
-        return new SuccessDataResult<>(this.convertToDtoSortedList(), "Products are listed.");
+        return new SuccessDataResult<>(this.convertToDtoSortedList(), Message.LISTED);
     }
 
     @Override
-    public DataResult<ProductResponseDto> getByProductId(Long id) {
-
+    public DataResult<ProductResponseDto> getById(Long id) {
         Product product = this.productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product could not found by id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(Message.NOT_FOUND_BY_ID));
 
-        return new SuccessDataResult<>(this.convertToDto(product), "The product has found.");
+        return new SuccessDataResult<>(this.convertToDto(product), Message.FOUND_BY_ID);
     }
 
     @Override
-    public DataResult<ProductResponseDto> getByProductName(String productName) {
-
+    public DataResult<ProductResponseDto> getByName(String productName) {
         Product product = this.productRepository.findByProductName(productName)
-                .orElseThrow(() -> new ProductNotFoundException("Product could not found by name: " + productName));
+                .orElseThrow(() -> new ProductNotFoundException(Message.NOT_FOUND_BY_NAME));
 
-        return new SuccessDataResult<>(this.convertToDto(product), "The product has found.");
+        return new SuccessDataResult<>(this.convertToDto(product), Message.FOUND_BY_NAME);
     }
 
     private Product convertToEntity(ProductRequestDto productRequest) {
