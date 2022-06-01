@@ -38,12 +38,12 @@ public class ProductController {
 
     @GetMapping("id/{id}")
     public ResponseEntity<?> getByProductId(@PathVariable Long id){
-        return ResponseEntity.ok(this.productService.getByProductId(id));
+        return ResponseEntity.ok(this.productService.getById(id));
     }
 
     @GetMapping("/{productName}")
     public ResponseEntity<?> getByProductName(@PathVariable String productName){
-        return ResponseEntity.ok(this.productService.getByProductName(productName));
+        return ResponseEntity.ok(this.productService.getByName(productName));
     }
 
 }

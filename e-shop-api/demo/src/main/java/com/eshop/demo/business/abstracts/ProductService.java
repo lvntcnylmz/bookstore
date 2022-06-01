@@ -15,8 +15,8 @@ public interface ProductService {
 
     DataResult<List<ProductResponseDto>> getAllSorted();
     
-    DataResult<ProductResponseDto> getByProductId(Long id);
+    DataResult<ProductResponseDto> getById(Long id);
 
-    DataResult<ProductResponseDto> getByProductName(String productName);
+    DataResult<ProductResponseDto> getByName(String productName);
 
 }
