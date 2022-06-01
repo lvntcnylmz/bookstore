@@ -5,7 +5,9 @@ public class Message {
     public static final String SAVED = "Saved";
     public static final String LISTED = "Listed";
     public static final String FOUND_BY_NAME = "Found by Name";
+    public static final String NOT_FOUND_BY_NAME = "Could not Found by Name";
     public static final String FOUND_BY_ID = "Found by ID";
+    public static final String NOT_FOUND_BY_ID = "Could not Found by ID";
 
     public static final String INVALID_PASSWORD = "Invalid Password";
     public static final String LOGIN_SUCCESSFUL = "Login Successful";
