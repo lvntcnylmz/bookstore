@@ -15,4 +15,6 @@ public interface CategoryService {
 
     DataResult<List<CategoryResponseDto>> getAllSorted();
 
+    DataResult<CategoryResponseDto> getById(Long id);
+
 }
