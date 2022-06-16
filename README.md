@@ -13,3 +13,4 @@ Simple e-commerce project that includes backend and frontend parts where users c
     - JUnit 5
 - **Frontend**
     - Angular 16
+    - Bootstrap 5
