@@ -35,5 +35,5 @@ build/
 ### Node JS ###
 node_modules/
 .idea/
-e-shop-frontend/.idea/
-e-shop-frontend/node_modules/
+bookstore-frontend/.idea/
+bookstore-frontend/node_modules/

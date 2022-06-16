@@ -1,4 +1,4 @@
-# **E-Shop Application**
+# **bookstore Application**
 
 Simple e-commerce project that includes backend and frontend parts where users can create an account, log in and add products/products.
 

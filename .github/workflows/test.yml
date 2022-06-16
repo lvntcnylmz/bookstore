@@ -19,7 +19,7 @@ jobs:
           distribution: temurin
       - name: Change directory to api
         run: mvn -B compile
-        working-directory: ./e-shop-api/demo
+        working-directory: ./bookstore-api/demo
 
   frontend:
     runs-on: ubuntu-latest
@@ -34,5 +34,5 @@ jobs:
           npm ci
           npm run build --if-present
           npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-        working-directory: ./e-shop-frontend
+        working-directory: ./bookstore-frontend
   
