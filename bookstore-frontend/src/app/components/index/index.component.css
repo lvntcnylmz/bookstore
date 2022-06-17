@@ -1,4 +1,11 @@
-.container {
-    height: 100%;
-    background-color: blueviolet;
+.card-group img {
+    width: 50%;
+}
+
+.card {
+    background-color: azure;
+}
+
+.btn {
+    background-color: #e66430;
 }
