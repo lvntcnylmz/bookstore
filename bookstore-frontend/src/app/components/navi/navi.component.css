@@ -1,3 +1,37 @@
-nav {
-    background-color: #4c0bce;
+.navbar {
+    background-color: #14377d;
+}
+
+.navbar > a {
+    font-size: xx-large;
+}
+
+.categories {
+    background-color: #e66430;
+}
+
+.categories a, a:hover {
+    color: beige;
+}
+
+.navbar-nav li:hover {
+    background-color: #14377d;
+}
+
+.form-control {
+    width: 30em;
+}
+
+button {
+    background-color: #e66430;
+    color: beige;
+}
+
+button:hover {
+    color: beige;
+}
+
+.empty{
+    height: 2000px;
+    background-color: aquamarine;
 }
