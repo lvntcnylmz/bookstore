@@ -1,6 +1,6 @@
-# **bookstore Application**
+# **BookStore Application**
 
-Simple e-commerce project that includes backend and frontend parts where users can create an account, log in and add products/products.
+Simple book store project that includes backend and frontend parts where users can create an account, log in and add book/books.
 
 ## **Tech Stack**
 - **Backend**
