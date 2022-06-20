@@ -1,7 +1,5 @@
 package com.bookstore.demo.entities.concretes;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 import com.bookstore.demo.entities.abstracts.BaseEntity;
@@ -15,18 +13,13 @@ public class Category extends BaseEntity {
 
     private String categoryName;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products;
-
-    public Category(Long id, String categoryName, List<Product> products) {
+    public Category(Long id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
-        this.products = products;
     }
 
-    public Category(String categoryName, List<Product> products) {
+    public Category(String categoryName) {
         this.categoryName = categoryName;
-        this.products = products;
     }
 
     public Category() {
@@ -48,20 +41,12 @@ public class Category extends BaseEntity {
         this.categoryName = categoryName;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((categoryName == null) ? 0 : categoryName.hashCode());
-        result = prime * result + ((products == null) ? 0 : products.hashCode());
+
         return result;
     }
 
@@ -78,11 +63,6 @@ public class Category extends BaseEntity {
             if (other.categoryName != null)
                 return false;
         } else if (!categoryName.equals(other.categoryName))
-            return false;
-        if (products == null) {
-            if (other.products != null)
-                return false;
-        } else if (!products.equals(other.products))
             return false;
         return true;
     }
