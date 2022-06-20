@@ -37,11 +37,6 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<?> productNotFoundException(ProductNotFoundException exception){
-        return new ResponseEntity<>(new ErrorResult(exception.getLocalizedMessage()), HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(CategoryNotFoundException.class)
     public ResponseEntity<?> categoryNotFoundException(CategoryNotFoundException exception){
         return new ResponseEntity<>(new ErrorResult(exception.getLocalizedMessage()), HttpStatus.NOT_FOUND);
